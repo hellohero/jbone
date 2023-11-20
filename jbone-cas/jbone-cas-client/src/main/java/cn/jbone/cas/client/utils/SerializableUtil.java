@@ -1,5 +1,6 @@
 package cn.jbone.cas.client.utils;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.session.Session;
@@ -35,6 +36,7 @@ public class SerializableUtil {
         try {
             ByteArrayInputStream bis = new ByteArrayInputStream(Base64.decode(sessionStr));
             ObjectInputStream ois = new ObjectInputStream(bis);
+            ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
             return (Session) ois.readObject();
         } catch (Exception e) {
             throw new RuntimeException("deserialize session error", e);
