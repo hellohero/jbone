@@ -55,7 +55,7 @@ public abstract class AbstractManagementController {
     public ModelAndView resolveException(final HttpServletRequest request, final HttpServletResponse response, final Exception ex) {
         LOGGER.error(ex.getMessage(), ex);
         final String contentType = request.getHeader(AJAX_REQUEST_HEADER_NAME);
-        if (contentType != null && contentType.equals(AJAX_REQUEST_HEADER_VALUE)) {
+        if (contentType != null && AJAX_REQUEST_HEADER_VALUE.equals(contentType)) {
             LOGGER.debug("Handling exception [{}] for ajax request indicated by header [{}]",
                     ex.getClass().getName(), AJAX_REQUEST_HEADER_NAME);
             JsonUtils.renderException(ex, response);
