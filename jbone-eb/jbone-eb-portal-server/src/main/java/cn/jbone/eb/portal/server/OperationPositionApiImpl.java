@@ -11,6 +11,9 @@ import cn.jbone.eb.portal.core.service.OperationPositionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,14 +27,14 @@ public class OperationPositionApiImpl implements OperationPositionApi {
     private OperationPositionService operationPositionService;
 
     @Override
-    @RequestMapping(value = "/findByPage", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/findByPage", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Result<OperationPositionListByPageResponseDTO> findByPage(@RequestBody SearchListDTO searchListDTO) {
         OperationPositionListByPageResponseDTO responseDTO = operationPositionService.findByPage(searchListDTO);
         return new Result<OperationPositionListByPageResponseDTO>(responseDTO);
     }
 
     @Override
-    @RequestMapping(value = "/save", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Result<Void> save(@RequestBody OperationPositionRequestDTO dto) {
         try {
             operationPositionService.save(dto);
@@ -42,7 +45,7 @@ public class OperationPositionApiImpl implements OperationPositionApi {
     }
 
     @Override
-    @RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Result<Void> update(@RequestBody OperationPositionRequestDTO dto) {
         try {
             operationPositionService.update(dto);
@@ -53,7 +56,7 @@ public class OperationPositionApiImpl implements OperationPositionApi {
     }
 
     @Override
-    @RequestMapping(value = "/findById", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/findById", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Result<OperationPositionResponceDTO> findById(@RequestBody Integer id) {
         OperationPositionResponceDTO responseDTO = new OperationPositionResponceDTO();
         try {
@@ -66,7 +69,7 @@ public class OperationPositionApiImpl implements OperationPositionApi {
     }
 
     @Override
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/delete", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Result<Void> delete(@RequestBody String ids) {
         try {
             operationPositionService.delete(ids);
