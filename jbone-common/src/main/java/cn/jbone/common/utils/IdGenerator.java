@@ -1,5 +1,6 @@
 package cn.jbone.common.utils;
 
+import java.security.SecureRandom;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.Random;
@@ -18,7 +19,7 @@ public class IdGenerator {
     public static long getId(IdTargetEnum targetEnum){
         long time = new Date().getTime();
         int uuidHashCode = Math.abs(UUID.randomUUID().toString().hashCode()) % 100000;
-        Random random = new Random();
+        Random random = new SecureRandom();
         int rv = random.nextInt(999);
         DecimalFormat df=new DecimalFormat("000");
         String endVal = df.format(rv);
